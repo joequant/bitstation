@@ -38,12 +38,10 @@ buildah run $container -- dnf --setopt=install_weak_deps=False --best \
 fi
 #repeat packages in setup
 dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodocs $rootfsArg \
-      php-fpm \
       php-json \
       python3-flask \
       python3-pexpect \
       python3-matplotlib \
-      webmin \
       sudo \
       git \
       R-base \

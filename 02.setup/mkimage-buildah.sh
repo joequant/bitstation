@@ -26,8 +26,6 @@ cat > $rootfsDir/usr/share/bitquant/bitquant.sh <<EOF
 build_date='$(date)'
 commit_id=$(git rev-parse --verify HEAD)
 EOF
-cp $rootfsDir/usr/share/bitquant/*.sh
-
 
 buildah config --cmd  "/usr/share/bitquant/startup-all.sh" $container
 buildah commit --format docker --squash --rm $container $name
