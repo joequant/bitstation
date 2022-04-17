@@ -344,6 +344,6 @@ fi
 # Docker mounts tmpfs at /dev and procfs at /proc so we can remove them
 rm -rf "$rootfsDir/dev" "$rootfsDir/proc"
 mkdir -p "$rootfsDir/dev" "$rootfsDir/proc"
-buildah commit --format docker --rm $container $name
+buildah commit --rm $container $name
 buildah push $name:latest docker-daemon:$name:latest
 

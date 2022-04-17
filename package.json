@@ -1,7 +1,8 @@
 {
-    "name": "bitstation",
-    "scripts": {
-	"build-base": "buildah unshare /bin/bash 01.cauldron/mkimage-buildah.sh",
-	"build-base-minimal": "buildah unshare /bin/bash 01.cauldron/mkimage-buildah-minimal.sh"
-    }
+  "name": "bitstation",
+  "scripts": {
+    "build": "buildah unshare /bin/bash ./02.setup/mkimage-buildah.sh",
+    "build-base": "buildah unshare /bin/bash 01.cauldron/mkimage-buildah.sh",
+    "build-base-minimal": "buildah unshare /bin/bash 01.cauldron/mkimage-buildah-minimal.sh"
+  }
 }
