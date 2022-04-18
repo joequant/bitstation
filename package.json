@@ -3,6 +3,7 @@
   "scripts": {
     "build": "buildah unshare /bin/bash ./02.setup/mkimage.sh",
     "build-base": "buildah unshare /bin/bash 01.cauldron/mkimage.sh",
-    "build-base-minimal": "buildah unshare /bin/bash 01.cauldron/mkimage-minimal.sh"
+    "build-base-minimal": "buildah unshare /bin/bash 01.cauldron/mkimage-minimal.sh",
+    "shell": "podman exec -ti bitstation_bitstation_1 /bin/bash"
   }
 }
