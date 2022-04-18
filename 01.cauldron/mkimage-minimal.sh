@@ -124,7 +124,7 @@ if [ -z $mirror ]; then
 		exit 1
 	fi
         # If mirror is *not* provided, use mirrorlist
-        reposetup="--disablerepo=* --enablerepo=$repo"
+        reposetup="--nogpgcheck --disablerepo=* --enablerepo=$repo"
 fi
 
 if [ ! -z $pkgmgr ]; then
@@ -158,6 +158,7 @@ if [ ! -z $systemd ]; then
 fi
 (
     dnf \
+            --nogpgcheck \
             --forcearch="$buildarch" \
             --installroot="$rootfsDir" \
             --releasever="$releasever" \
@@ -174,6 +175,7 @@ rm -f filesystem-*.rpm  makedev-*.rpm
 
 (
     dnf \
+	    --nogpgcheck \
             --forcearch="$buildarch" \
             --installroot="$rootfsDir" \
             --releasever="$releasever" \
@@ -188,8 +190,6 @@ cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
 [mirrors]
 name=mirrors
 mirrorlist=file:///etc/yum.repos.d/mirrorlist
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Mageia
 enabled=1
 EOF
 
