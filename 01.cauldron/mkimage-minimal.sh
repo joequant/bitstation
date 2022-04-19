@@ -69,7 +69,7 @@ if [ ! -z "$buildarch" -a -z "$mirror" ]; then
 fi
 
 if [ -z $name ]; then
-        name="joequant/cauldron-minimal"
+        name="localhost/joequant/cauldron-minimal"
 fi
 
 if [ -z $buildarch ]; then

@@ -22,6 +22,8 @@ cp $script_dir/*.sh $rootfsDir/tmp
 chmod a+x $rootfsDir/tmp/*.sh
 mkdir $rootfsDir/usr/share/bitquant
 source $script_dir/00-install-pkgs.sh
+buildah run $container parallel --halt 2 --tagstring '{}' --linebuffer source '/tmp/{}' :::  01-install-r-pkgs.sh 01-install-python.sh 01-install-npm.sh
+
 cat > $rootfsDir/usr/share/bitquant/bitquant.sh <<EOF
 build_date='$(date)'
 commit_id=$(git rev-parse --verify HEAD)
@@ -31,5 +33,4 @@ cp $script_dir/startup-all.sh $rootfsDir/usr/share/bitquant/startup-all.sh
 chmod a+x $rootfsDir/usr/share/bitquant/startup-all.sh
 buildah config --cmd  "/usr/share/bitquant/startup-all.sh" $container
 buildah commit --format docker --squash --rm $container $name
-buildah push $name:latest docker-daemon:$name:latest
 

@@ -8,12 +8,14 @@ cd $SCRIPT_DIR
 mkdir -p $LOG_DIR
 chmod a+w $LOG_DIR
 chmod a+rx /home/user
+mkdir -p /etc/jupyterhub
+chown -R rhea:rhea /etc/jupyterhub
 
-if [ -x /usr/bin/jupyterhub ] ; then
+if [ -x /usr/local/bin/jupyterhub ] ; then
     echo "Start jupyterhub"
     pushd /etc/jupyterhub
     rm -f jupyterhub-proxy.pid
-    sudo -u rhea /usr/bin/jupyterhub --JupyterHub.spawner_class=sudospawner.SudoSpawner --JupyterHub.authenticator_class='jhub_remote_user_authenticator.remote_user_auth.RemoteUserAuthenticator' --base-url='/jupyterhub' --Spawner.default_url='/lab' --debug >> $LOG_DIR/jupyterhub.log 2>&1 &
+    sudo -u rhea /usr/local/bin/jupyterhub --JupyterHub.spawner_class=sudospawner.SudoSpawner --JupyterHub.authenticator_class='jhub_remote_user_authenticator.remote_user_auth.RemoteUserAuthenticator' --base-url='/jupyterhub' --Spawner.default_url='/lab' --debug >> $LOG_DIR/jupyterhub.log 2>&1 &
     popd
 fi
 
