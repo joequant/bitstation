@@ -22,7 +22,9 @@ cp $script_dir/*.sh $rootfsDir/tmp
 chmod a+x $rootfsDir/tmp/*.sh
 mkdir $rootfsDir/usr/share/bitquant
 source $script_dir/00-install-pkgs.sh
+cp $script_dir/00_bitquant_sudo $rootfsDir/etc/sudoers.d/
 buildah run $container parallel --halt 2 --tagstring '{}' --linebuffer source '/tmp/{}' :::  01-install-r-pkgs.sh 01-install-python.sh 01-install-npm.sh
+buildah run $container /tmp/02-set-password.sh
 
 cat > $rootfsDir/usr/share/bitquant/bitquant.sh <<EOF
 build_date='$(date)'
@@ -33,4 +35,3 @@ cp $script_dir/startup-all.sh $rootfsDir/usr/share/bitquant/startup-all.sh
 chmod a+x $rootfsDir/usr/share/bitquant/startup-all.sh
 buildah config --cmd  "/usr/share/bitquant/startup-all.sh" $container
 buildah commit --format docker --squash --rm $container $name
-
