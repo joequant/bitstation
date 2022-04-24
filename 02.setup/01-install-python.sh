@@ -17,4 +17,9 @@ jhub_remote_user_authenticator
 ipywidgets
 ipycanvas
 seaborn
+calysto_bash
+octave_kernel
+ipympl
+mpmath
+sympy
 EOF

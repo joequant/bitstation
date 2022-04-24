@@ -23,8 +23,9 @@ chmod a+x $rootfsDir/tmp/*.sh
 mkdir $rootfsDir/usr/share/bitquant
 source $script_dir/00-install-pkgs.sh
 cp $script_dir/00_bitquant_sudo $rootfsDir/etc/sudoers.d/
-buildah run $container parallel --halt 2 --tagstring '{}' --linebuffer source '/tmp/{}' :::  01-install-r-pkgs.sh 01-install-python.sh 01-install-npm.sh
+buildah run $container parallel --halt 2 --tagstring '{}' --linebuffer source '/tmp/{}' :::  01-install-r-pkgs.sh 01-install-python.sh 01-install-npm.sh 01-install-ruby.sh
 buildah run $container /tmp/02-set-password.sh
+buildah run $container /tmp/03-install-jupyter.sh
 
 cat > $rootfsDir/usr/share/bitquant/bitquant.sh <<EOF
 build_date='$(date)'

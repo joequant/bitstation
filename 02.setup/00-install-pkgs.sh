@@ -161,6 +161,40 @@ dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodoc
       dub \
       phobos-devel
 
+# add iproute2 for webmin
+dnf -y $rootfsArg \
+    --setopt=install_weak_deps=False --nodocs \
+    install java-headless iproute2 \
+    quantlib-devel pybind11-devel \
+    root-r \
+    phobos-devel \
+    python3-jupyroot \
+    root \
+      root-physics \
+      root-geom \
+      root-fftw \
+      root-hist \
+      root-foam \
+      root-vecops \
+      root-graf \
+      root-graf-asimage \
+      root-graf-gpad \
+      root-graf-gpadv7 \
+      root-graf-gviz \
+      root-graf-postscript \
+      root-graf-primitives \
+      root-graf3d \
+      root-geom \
+      root-gui \
+      root-hist \
+      root-mathcore \
+      root-mathmore \
+      root-matrix \
+      root-minuit \
+      root-multiproc \
+      root-graf-postscript \
+      root-graf-asimage
+
 chmod a+x $rootfsDir/usr/lib64/R/bin/*
 dnf clean all $rootfsArg
 rm -rf $rootfsDir/var/log/*.log

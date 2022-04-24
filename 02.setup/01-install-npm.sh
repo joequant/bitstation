@@ -25,5 +25,4 @@ npm install -g --unsafe-perm=true configurable-http-proxy solc modclean
 # https://github.com/n-riesco/ijavascript/issues/200
 # fixed for all but livescript
 # 
-npm i -g --unsafe-perm=true ethercalc
 pump --shutdown
