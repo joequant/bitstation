@@ -1,8 +1,8 @@
 #!/bin/bash
 # adjust this to set the password
 
-echo 'cubswin:)' | passwd user --stdin
-echo 'cubswin:)' | passwd root --stdin
+echo 'password' | passwd user --stdin
+echo 'password' | passwd root --stdin
 
 # configuration
 # https://wiki.archlinux.org/title/JupyterHub

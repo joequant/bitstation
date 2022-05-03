@@ -29,6 +29,6 @@ VOLUMES=$($CMD volume ls | awk 'FNR >=2 {print $NF}' | grep ^$ID)
 
 for vol in $VOLUMES; do
     echo $vol
-    $CMD run -v $vol:/volume --rm loomchild/volume-backup backup -c xz - > ${vol}.$DATE.tar.xz
+    $CMD run -v $vol:/volume --rm loomchild/volume-backup backup -c bz2 - > ${vol}.$DATE.tar.bz2
 done
 popd
