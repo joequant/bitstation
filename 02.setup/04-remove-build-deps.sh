@@ -98,7 +98,6 @@ rm -rf home/user/.npm/
 rm -rf home/user/.node-gyp
 rm -rf root/.cache
 rm -rf root/.node-gyp
-rm -rf usr/local/share
 rm -rf usr/lib/.build-id
 rm -rf var/cache/*
 # need to keep archive for dmd
