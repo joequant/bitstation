@@ -38,6 +38,6 @@ fi
 if [ $timeout_exit == 0 ] ; then
     echo "running distcc (pump mode)"
     pathadd "/usr/lib64/distcc"
-    export DISTCC_HOSTS='$cache_server,cpp,lzo'
+    export DISTCC_HOSTS=$cache_server',cpp,lzo'
     eval `pump --startup`
 fi
