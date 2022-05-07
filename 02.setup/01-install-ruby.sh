@@ -1,6 +1,7 @@
 #!/bin/bash
 # TODO - fixes
 set -v
+source $rootfsDir/tmp/env.sh
 source $rootfsDir/tmp/proxy.sh
 export CPPFLAGS="-Wno-error=deprecated-declarations"
 export JUPYTER_DATA_DIR=/usr/share/jupyter

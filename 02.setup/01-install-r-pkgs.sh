@@ -5,6 +5,7 @@ set -v
 echo "Running r installation"
 
 export PATH=/usr/lib64/R/bin:/usr/lib/R/bin:$PATH
+source $rootfsDir/tmp/env.sh
 source $rootfsDir/tmp/proxy.sh
 
 echo "Generating new modules"

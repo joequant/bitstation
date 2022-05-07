@@ -2,7 +2,7 @@
 
 set -v
 set +o errexit
-
+source $rootfsDir/tmp/env.sh
 source $rootfsDir/tmp/proxy.sh
 npm install -g node-gyp coffeescript typescript
 

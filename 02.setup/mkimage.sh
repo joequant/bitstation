@@ -5,6 +5,9 @@ set -e -v
 mkimg="$(basename "$0")"
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 container=$(buildah from joequant/cauldron)
+cache_server=${cache_server:-172.17.0.1}
+echo "cache server: ${cache_server}"
+
 
 buildah config --label maintainer="Joseph C Wang <joequant@gmail.com>" $container
 buildah config --user root $container
@@ -20,6 +23,11 @@ export LANG=C
 name="joequant/bitstation"
 cp $script_dir/*.sh $rootfsDir/tmp
 chmod a+x $rootfsDir/tmp/*.sh
+
+cat <<EOF > $rootfsDir/tmp/env.sh
+export cache_server=${cache_server:-172.17.0.1}
+EOF
+
 mkdir $rootfsDir/usr/share/bitquant
 source $script_dir/00-install-pkgs.sh
 cp $script_dir/00_bitquant_sudo $rootfsDir/etc/sudoers.d/

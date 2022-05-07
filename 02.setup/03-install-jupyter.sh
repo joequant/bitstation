@@ -3,6 +3,7 @@
 set -v
 set +o errexit
 
+source $rootfsDir/tmp/env.sh
 source $rootfsDir/tmp/proxy.sh
 
 echo "Running r installation"
