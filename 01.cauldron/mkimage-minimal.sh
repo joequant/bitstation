@@ -214,8 +214,6 @@ fi
 	#  locales
 	#  docs
 	rm -rf usr/share/{man,doc,info,gnome/help}
-	#  cracklib
-	rm -rf usr/share/cracklib
 	#  i18n
 	rm -rf usr/share/i18n
 	#  dnf cache
