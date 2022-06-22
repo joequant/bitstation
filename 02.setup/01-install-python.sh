@@ -42,6 +42,12 @@ bqplot
 ipychart
 pythreejs
 RISE
+ipython-sql
+sqlalchemy
+pandas-bokeh
+mysql
+pyodbc
+psycopg2
 EOF
 
 mkdir -p /usr/etc/jupyter

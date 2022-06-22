@@ -160,7 +160,9 @@ dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodoc
       texlive-dist \
       dmd \
       dub \
-      phobos-devel
+      phobos-devel \
+      unixODBC-devel \
+      postgresql-devel
 
 chmod a+x $rootfsDir/usr/lib64/R/bin/*
 dnf clean all $rootfsArg
