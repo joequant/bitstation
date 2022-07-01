@@ -146,6 +146,7 @@ dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodoc
       distcc \
       curl \
       conda \
+      julia \
       which \
       jupyter-jupyterlab \
       jupyter-core \

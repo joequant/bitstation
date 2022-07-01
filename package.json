@@ -4,7 +4,7 @@
     "build": "buildah unshare /bin/bash ./02.setup/mkimage.sh",
     "build-base": "buildah unshare /bin/bash 01.cauldron/mkimage.sh",
     "build-base-minimal": "buildah unshare /bin/bash 01.cauldron/mkimage-minimal.sh",
-    "shell": "podman exec -ti bitstation_bitstation_1 /bin/bash",
+    "shell": "podman exec -ti -u user bitstation_bitstation_1 /bin/bash",
     "up": "podman-compose up",
     "down": "podman-compose down"
   }
