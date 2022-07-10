@@ -31,6 +31,7 @@ EOF
 mkdir $rootfsDir/usr/share/bitquant
 source $script_dir/00-install-pkgs.sh
 cp $script_dir/00_bitquant_sudo $rootfsDir/etc/sudoers.d/
+sed -i -e 's/USER_TIME_QUOTA = 3.8/USER_TIME_QUOTA = 20.0/' $rootfsDir/usr/li*/python*/site-packages/include_server/basics.py
 buildah run $container parallel --halt 2 --tagstring '{}' --linebuffer source '/tmp/{}' :::  01-install-r-pkgs.sh 01-install-python.sh 01-install-npm.sh 01-install-ruby.sh
 buildah run $container /tmp/02-set-password.sh
 buildah run $container /tmp/03-install-jupyter.sh

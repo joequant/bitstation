@@ -163,7 +163,12 @@ dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodoc
       dub \
       phobos-devel \
       unixODBC-devel \
-      postgresql-devel
+      postgresql-devel \
+      xeus-python \
+      xeus-sql \
+      cling \
+      xeus-cling \
+      harfbuzz-devel
 
 chmod a+x $rootfsDir/usr/lib64/R/bin/*
 dnf clean all $rootfsArg

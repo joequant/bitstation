@@ -48,7 +48,13 @@ pandas-bokeh
 mysql
 pyodbc
 psycopg2
+jupytext
+tensorflow
+keras
 EOF
+
+jupyter serverextension enable voila
+jupyter server extension enable voila
 
 mkdir -p /usr/etc/jupyter
 cat <<EOF > /usr/etc/jupyter/jupyter_notebook_config.py
