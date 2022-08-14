@@ -171,7 +171,7 @@ fi
 rpm --initdb  --root $rootfsDir
 rpm -Uvh --nodeps filesystem-*.rpm  --root $rootfsDir
 rpm -Uvh --noscripts --nodeps makedev-*.rpm  --root $rootfsDir
-rm -f filesystem-*.rpm  makedev-*.rpm
+rm -f *.rpm
 
 (
     dnf \
@@ -194,6 +194,13 @@ enabled=1
 EOF
 )
 
+buildah run $container ca-legacy install
+buildah run $container mkdir -p /etc/pki/ca-trust/extracted/openssl \
+        /etc/pki/ca-trust/extracted/pem \
+        /etc/pki/ca-trust/extracted/java \
+        /etc/pki/ca-trust/extracted/edk2
+buildah run $container update-ca-trust
+
 # Make sure /etc/resolv.conf has something useful in it
 # This is being done before urpmi.addmedia call to ensure
 # that will work from within the chroot...
@@ -210,7 +217,8 @@ if [[ $pkgmgr == *"urpmi"* ]]; then
         chroot "$rootfsDir" urpmi.addmedia --curl --distrib --mirrorlist "https://mirrors.mageia.org/api/mageia.$releasever.$buildarch.list"
 fi
 
-	cd "$rootfsDir"
+cd "$rootfsDir"
+
 rpm --erase basesystem-minimal-core  --root $rootfsDir
 dnf autoremove -y \
     --installroot="$rootfsDir" \
@@ -220,7 +228,7 @@ dnf autoremove -y \
 rpm --erase --nodeps systemd shared-mime-info  --root $rootfsDir
 dnf clean all --installroot="$rootfsDir"
 rm etc/yum.repos.d/mageia*
-	
+
 	# effectively: febootstrap-minimize --keep-zoneinfo --keep-rpmdb --keep-services "$target"
 	#  locales
 	#  docs
@@ -328,6 +336,7 @@ chmod 0644 $rootfsDir/var/lib/rpm/*
 cat <<EOF > $rootfsDir/etc/sudoers.d/user
 %wheel        ALL=(ALL)       NOPASSWD: ALL
 EOF
+
 chmod 0755 $rootfsDir/home/user
 buildah config --user "user" $container
 buildah config --cmd "/bin/bash" $container
