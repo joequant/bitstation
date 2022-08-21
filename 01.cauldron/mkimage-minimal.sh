@@ -193,6 +193,9 @@ mirrorlist=file:///etc/yum.repos.d/mirrorlist
 enabled=1
 EOF
 
+cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
+chmod 0755 $rootfsDir/usr/sbin/install-certs.sh
+
 # Make sure /etc/resolv.conf has something useful in it
 # This is being done before urpmi.addmedia call to ensure
 # that will work from within the chroot...

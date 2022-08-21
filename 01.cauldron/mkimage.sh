@@ -194,12 +194,9 @@ enabled=1
 EOF
 )
 
-buildah run $container ca-legacy install
-buildah run $container mkdir -p /etc/pki/ca-trust/extracted/openssl \
-        /etc/pki/ca-trust/extracted/pem \
-        /etc/pki/ca-trust/extracted/java \
-        /etc/pki/ca-trust/extracted/edk2
-buildah run $container update-ca-trust
+cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
+chmod 0755 $rootfsDir/usr/sbin/install-certs.sh
+buildah run $container /usr/sbin/install-certs.sh
 
 # Make sure /etc/resolv.conf has something useful in it
 # This is being done before urpmi.addmedia call to ensure
