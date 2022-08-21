@@ -26,7 +26,7 @@ ipyvolume
 ipygany
 voila
 jupyterlab-git
-lckr-jupyterlab-variableinspector
+jupyterlab-github
 pandas
 jupyterlab_latex
 aquirdturtle_collapsible_headings
@@ -52,7 +52,7 @@ jupytext
 tensorflow
 keras
 EOF
-
+#lckr-jupyterlab-variableinspector
 jupyter serverextension enable voila
 jupyter server extension enable voila
 
