@@ -83,7 +83,7 @@ dnf --setopt=install_weak_deps=False --best --allowerasing install -v -y --nodoc
       python3-fs \
       python3-scipy \
       python3-qstk \
-      python3-scikits-learn \
+      python3-scikit-learn \
       python3-rpy2 \
       python3-xlwt \
       python3-xlrd \
