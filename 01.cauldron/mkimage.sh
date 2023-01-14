@@ -183,15 +183,15 @@ rm -f *.rpm
             --nodocs --assumeyes install \
             basesystem-minimal-core locales locales-en \
 	    ncurses sudo dnf
-	cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
-	cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
-[mirrors]
-name=mirrors
-mirrorlist=file:///etc/yum.repos.d/mirrorlist
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Mageia
-enabled=1
-EOF
+#	cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
+#	cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
+#[mirrors]
+#name=mirrors
+#mirrorlist=file:///etc/yum.repos.d/mirrorlist
+#gpgcheck=1
+#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Mageia
+#enabled=1
+#EOF
 )
 
 cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
@@ -225,6 +225,7 @@ dnf autoremove -y \
 rpm --erase --nodeps systemd shared-mime-info  --root $rootfsDir
 dnf clean all --installroot="$rootfsDir"
 rm etc/yum.repos.d/mageia*
+cp $script_dir/*.repo $rootfsDir/etc/yum.repos.d
 
 	# effectively: febootstrap-minimize --keep-zoneinfo --keep-rpmdb --keep-services "$target"
 	#  locales

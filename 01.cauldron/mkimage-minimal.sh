@@ -185,13 +185,14 @@ rm -f filesystem-*.rpm  makedev-*.rpm
 	    $extrapkgs
 )
 mkdir $rootfsDir/etc/yum.repos.d
-cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
-cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
-[mirrors]
-name=mirrors
-mirrorlist=file:///etc/yum.repos.d/mirrorlist
-enabled=1
-EOF
+cp $script_dir/*.repo $rootfsDir/etc/yum.repos.d
+#cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
+#cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
+#[mirrors]
+#name=mirrors
+#mirrorlist=file:///etc/yum.repos.d/mirrorlist
+#enabled=1
+#EOF
 
 cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
 chmod 0755 $rootfsDir/usr/sbin/install-certs.sh
