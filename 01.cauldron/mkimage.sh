@@ -70,7 +70,8 @@ if [ ! -z "$buildarch" -a -z "$mirror" ]; then
 fi
 
 if [ -z $name ]; then
-        name="localhost/joequant/cauldron"
+    name="localhost/joequant/cauldron"
+    docker_name="joequant/cauldron"
 fi
 
 if [ -z $buildarch ]; then
@@ -183,15 +184,15 @@ rm -f *.rpm
             --nodocs --assumeyes install \
             basesystem-minimal-core locales locales-en \
 	    ncurses sudo dnf
-#	cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
-#	cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
-#[mirrors]
-#name=mirrors
-#mirrorlist=file:///etc/yum.repos.d/mirrorlist
-#gpgcheck=1
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Mageia
-#enabled=1
-#EOF
+	cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
+	cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
+[mirrors]
+name=mirrors
+mirrorlist=file:///etc/yum.repos.d/mirrorlist
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-Mageia
+enabled=1
+EOF
 )
 
 cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
@@ -340,5 +341,5 @@ buildah config --user "user" $container
 buildah config --cmd "/bin/bash" $container
 
 buildah commit --format docker --rm $container $name
-buildah push $name:latest docker-daemon:$name:latest
+buildah push $name:latest docker-daemon:$docker_name:latest
 

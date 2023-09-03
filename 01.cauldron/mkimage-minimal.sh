@@ -69,7 +69,8 @@ if [ ! -z "$buildarch" -a -z "$mirror" ]; then
 fi
 
 if [ -z $name ]; then
-        name="localhost/joequant/cauldron-minimal"
+    name="localhost/joequant/cauldron-minimal"
+    docker_name="joequant/cauldron-minimal"
 fi
 
 if [ -z $buildarch ]; then
@@ -186,13 +187,13 @@ rm -f filesystem-*.rpm  makedev-*.rpm
 )
 mkdir $rootfsDir/etc/yum.repos.d
 cp $script_dir/*.repo $rootfsDir/etc/yum.repos.d
-#cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
-#cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
-#[mirrors]
-#name=mirrors
-#mirrorlist=file:///etc/yum.repos.d/mirrorlist
-#enabled=1
-#EOF
+cp $script_dir/mirrorlist $rootfsDir/etc/yum.repos.d
+cat <<EOF > $rootfsDir/etc/yum.repos.d/mirrors.repo
+[mirrors]
+name=mirrors
+mirrorlist=file:///etc/yum.repos.d/mirrorlist
+enabled=1
+EOF
 
 cp $script_dir/install-certs.sh $rootfsDir/usr/sbin
 chmod 0755 $rootfsDir/usr/sbin/install-certs.sh
@@ -347,5 +348,5 @@ fi
 rm -rf "$rootfsDir/dev" "$rootfsDir/proc"
 mkdir -p "$rootfsDir/dev" "$rootfsDir/proc"
 buildah commit --rm $container $name
-buildah push $name:latest docker-daemon:$name:latest
+buildah push $name:latest docker-daemon:$docker_name:latest
 
